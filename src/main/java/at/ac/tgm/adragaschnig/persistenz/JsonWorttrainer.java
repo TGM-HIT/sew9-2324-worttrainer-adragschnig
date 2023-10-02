@@ -34,6 +34,17 @@ public class JsonWorttrainer implements PersistenzArt{
 
     @Override
     public void speichern(int richtig, int falsch) {
+        try (FileReader reader = new FileReader(path)) {
+            JSONObject jsonObject = new JSONObject(reader);
 
+            jsonObject.put("richtig", richtig);
+            jsonObject.put("falsch", falsch);
+
+            try (FileWriter writer = new FileWriter(path)) {
+                writer.write(jsonObject.toString(4));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

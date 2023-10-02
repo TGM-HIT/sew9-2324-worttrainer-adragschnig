@@ -17,17 +17,19 @@ public class WortEintrag {
         return wort;
     }
 
-    public void setWort(String wort) {
+    public boolean setWort(String wort) {
         if(wort.length() > 1) {
             this.wort = wort;
+            return true;
         }
+        return false;
     }
 
     public String getUrl() {
         return url;
     }
 
-    public void setUrl(String url) {
+    public boolean setUrl(String url) {
         String urlString = url;
         try {
             URL checkedUrl = new URL(urlString);
@@ -35,6 +37,8 @@ public class WortEintrag {
         } catch (MalformedURLException e) {
             System.out.println("Die URL ist ungültig: " + urlString);
             e.printStackTrace();
+            return false;
         }
+        return true;
     }
 }
